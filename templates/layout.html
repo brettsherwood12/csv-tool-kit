@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tool Kit</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    {{ dropzone.load_css() }} {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
+  </head>
+  <body>
+    {% include 'includes/_navbar.html' %}
+    <main>{% block body %}{% endblock %}</main>
+    {{ dropzone.load_js() }} {{ dropzone.config() }}
+  </body>
+</html>

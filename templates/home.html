@@ -1,0 +1,22 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="home">
+  <div>
+    <h1 class="heading">The Tools:</h1>
+  </div>
+  <div class="tool-links">
+    <a class="tool-link" href="/upload">
+      <img src="{{ url_for('static', filename='img/earth.jpg') }}" alt="earth" />
+      <span>Upload</span>
+    </a>
+    <a class="tool-link" href="/upload">
+      <img src="{{ url_for('static', filename='img/earth.jpg') }}" alt="earth" />
+      <span>Tool 2</span>
+    </a>
+    <a class="tool-link" href="/upload">
+      <img src="{{ url_for('static', filename='img/earth.jpg') }}" alt="earth" />
+      <span>Tool 3</span>
+    </a>
+  </div>
+  <hr />
+</div>
+{% endblock %}
