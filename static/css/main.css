@@ -72,9 +72,19 @@ main {
 }
 .tool {
   margin-top: 8rem;
+  width: 60%;
   display: flex;
 }
 .left {
-  width: 80%;
-  padding-top: 20px;
+  width: 50%;
+}
+.about {
+  padding-bottom: 4rem;
+}
+#dropzone {
+  border: 2px dashed #0087f7;
+  background-color: white;
+  padding: 2rem;
+  margin-right: 2rem;
+  height: 18rem;
 }
