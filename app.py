@@ -11,42 +11,59 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 dropzone = Dropzone(app)
 
-@app.before_request
-def log_request_info():
-    app.logger.debug('Body: %s', request.get_data())
-
 @app.route("/")
 def home():
   return render_template("home.html")
 
-@app.route("/upload", methods=["POST"])
-def upload():
-  f = request.files.get("file")
-  f.save(os.path.join(basedir, "uploads", filename))
-  print(request.form)
-  return "OK"
-
-@app.route("/visualizer", methods=["GET"])
+@app.route("/visualizer", methods=["GET", "POST"])
 def visualizer():
-  return render_template("visualizer.html")
+  if request.method == "POST":
+    f = request.files.get("file")
+    filename = request.form["filename"]
+    f.save(os.path.join(basedir, "uploads", filename))
+    return redirect('/visualizer/' + filename)
+  else:
+    return render_template("visualizer.html")
 
-@app.route("/processor", methods=["GET"])
+@app.route("/processor", methods=["GET", "POST"])
 def processor():
-  return render_template("processor.html")
+  if request.method == "POST":
+    f = request.files.get("file")
+    filename = request.form["filename"]
+    f.save(os.path.join(basedir, "uploads", filename))
+    return redirect('/processor/' + filename)
+  else:
+    return render_template("processor.html")
 
-@app.route("/visualizer-results/<filename>", methods=["GET"])
+@app.route("/viewer", methods=["GET", "POST"])
+def viewer():
+  if request.method == "POST":
+    f = request.files.get("file")
+    filename = request.form["filename"]
+    f.save(os.path.join(basedir, "uploads", filename))
+    return redirect('/viewer/' + filename)
+  else:
+    return render_template("viewer.html")
+
+@app.route("/visualizer/<filename>")
 def visualizer_results(filename):
   data = get_data_from_csv(filename)
-  return render_template("visualizerresults.html", data=data)
+  return render_template("graph.html", data=data)
 
-@app.route("/processor-results/<filename>", methods=["GET"])
+@app.route("/processor/<filename>")
 def processor_results(filename):
   data = get_data_from_csv(filename)
-  return render_template("processorresults.html", data=data)
+  return render_template("analysis.html", data=data)
 
-@app.route("/about", methods=["GET"])
+@app.route("/viewer/<filename>")
+def viewer_results(filename):
+  data = get_data_from_csv(filename)
+  return render_template("table.html", data=data)
+
+@app.route("/about")
 def about():
   return render_template("about.html")
 
-if __name__ == "main":
-  app.run(debug=true)
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('notfound.html'), 404
