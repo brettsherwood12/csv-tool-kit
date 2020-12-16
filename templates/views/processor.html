@@ -1,0 +1,12 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="tool">
+  <div class="left">{% with action="processor" %} {% include 'includes/_dropzone.html' %} {% endwith %}</div>
+  <div class="right">
+    <p>
+      This tool has not been implemented yet. Will eventually produce a graph of data. Right not it just execeutes the
+      same functionality as the "viewer" tool - This tool is just for me to test sending data back and forth, and has no
+      practical application, as it displays the csv in tabular format, just like excel.
+    </p>
+  </div>
+</div>
+{% endblock %}

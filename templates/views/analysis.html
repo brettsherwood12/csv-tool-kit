@@ -1,0 +1,24 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="results">
+  <h2>Analysis of CSV Data:</h2>
+  <table>
+    <thead>
+      <tr>
+        {% for key in data[0] %}
+        <th>{{ key }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for dict in data %}
+      <tr>
+        {% for key in dict %}
+        <td>{{ dict[key] }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <hr />
+</div>
+{% endblock %}
