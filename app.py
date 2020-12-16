@@ -1,14 +1,12 @@
 # start virtual env with ". venv/bin/activate"
 # tell flask to debug with "export FLASK_ENV=development"
 from flask import Flask, request, url_for, render_template, redirect, jsonify
-from flask_dropzone import Dropzone
 import os, json
 
 from helpers import get_dict_from_csv, delete_csv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-dropzone = Dropzone(app)
 
 @app.route("/")
 def home():
